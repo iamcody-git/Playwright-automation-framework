@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+from pages.cart_page import CartPage
 
 import pytest
 
@@ -26,3 +27,10 @@ def inventory_page(login_page, test_data):
     """Log in as standard_user and return the InventoryPage object."""
     login_page.login(test_data["users"]["standard"], test_data["password"])
     return InventoryPage(login_page.page)
+
+@pytest.fixture
+def cart_page(inventory_page):
+    """Add one item, go to cart, and return the CartPage object."""
+    inventory_page.add_item_to_cart_by_name("Sauce Labs Backpack")
+    inventory_page.go_to_cart()
+    return CartPage(inventory_page.page)
