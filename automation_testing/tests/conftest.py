@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from pages.login_page import LoginPage
+from pages.inventory_page import InventoryPage
 
 import pytest
 
@@ -19,3 +20,9 @@ def login_page(page):
     login = LoginPage(page)
     login.open()
     return login
+
+@pytest.fixture
+def inventory_page(login_page, test_data):
+    """Log in as standard_user and return the InventoryPage object."""
+    login_page.login(test_data["users"]["standard"], test_data["password"])
+    return InventoryPage(login_page.page)
