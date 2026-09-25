@@ -12,6 +12,9 @@ class InventoryPage:
         self.cart_badge = page.locator(".shopping_cart_badge")
         self.cart_link = page.locator(".shopping_cart_link")
 
+        self.menu_button = page.locator("#react-burger-menu-btn")
+        self.logout_link = page.locator("#logout_sidebar_link")
+
     def sort_by(self, option_value):
         """option_value: 'az', 'za', 'lohi', 'hilo'"""
         self.sort_dropdown.select_option(option_value)
@@ -33,3 +36,7 @@ class InventoryPage:
 
     def go_to_cart(self):
         self.cart_link.click()
+
+    def logout(self):
+        self.menu_button.click()
+        self.logout_link.click()
